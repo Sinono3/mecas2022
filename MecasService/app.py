@@ -49,22 +49,30 @@ def sensor_thread():
 
 
 def lcd_thread():
-    lcd = CharLCD("PCF8574", 0x27)
+    try:
+        lcd = CharLCD("PCF8574", 0x27)
+    except:
+        print("LCD initialization failed")
+        quit()
 
     while True:
-        lcd.clear()
-        lcd.cursor_pos = (0, 0)
+        try:
+            lcd.clear()
+            lcd.cursor_pos = (0, 0)
 
-        if initialized:
-            text = (
-                f"pH: {ph:.2f}\r\n"
-                + f"Profundidad: {depth:.2f}cm\r\n"
-                + f"Temperatura: {temp:.2f}°C"
-            )
-        else:
-            text = "Initializing..."
+            if initialized:
+                text = (
+                    f"pH:\r\n{ph:.2f}\r\n"
+                    + f"Profundidad: {depth:.0f}cm\r\n"
+                    + f"Temperatura: {temp:.2f}C"
+                )
+            else:
+                text = "\r\n\r\n\r\nInicializando..."
 
-        lcd.write_string(text)
+            lcd.write_string(text)
+        except:
+            print("LCD write failed")
+
         time.sleep(1.0)
 
 
