@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+		<title>MECAS</title>
+	</head>
+
+	<body>
+		<div class="container mx-4">
+			<section class="hero is-info welcome is-small my-2">
+				<div class="hero-body">
+					<div class="container">
+						<h1 class="title">
+							MECAS
+						</h1>
+						<h2 class="subtitle">
+							Monitoreo Electrónico de la Calidad del Agua Subterránea
+						</h2>
+					</div>
+				</div>
+			</section>
+			<section class="info-tiles">
+				<div class="tile is-ancestor has-text-centered">
+					{% if initialized %}
+					<div class="tile is-parent">
+						<article class="tile is-child box">
+							<p class="title">{{ ph }} </p>
+							<p class="subtitle">pH</p>
+						</article>
+					</div>
+					<div class="tile is-parent">
+						<article class="tile is-child box">
+							<p class="title">{{ temp }}</p>
+							<p class="subtitle">Temperatura</p>
+						</article>
+					</div>
+					<div class="tile is-parent">
+						<article class="tile is-child box">
+							<p class="title">{{ depth }}</p>
+							<p class="subtitle">Profundidad</p>
+						</article>
+					</div>
+					{% else %}
+					<div class="tile is-parent">
+						<article class="tile is-child box">
+							<p class="title">Inicializando...</p>
+						</article>
+					</div>
+					{% endif %}
+				</div>
+			</section>
+		</div>
+	</body>
+</html>

@@ -2,7 +2,7 @@
 import threading
 import time
 
-from flask import Flask
+from flask import Flask, render_template
 from arduino import ArduinoSensors
 from therm import TemperatureSensor
 from RPLCD.i2c import CharLCD
@@ -71,14 +71,13 @@ def flask_thread():
 
     @app.route("/")
     def index():
-        if initialized:
-            return (
-                f"pH: {ph:.2f}<br>"
-                + f"Profundidad: {depth:.2f}cm<br>"
-                + f"Temperatura: {temp:.2f}°C"
-            )
-        else:
-            return "Initializing..."
+        return render_template(
+            "index.html",
+            initialized=initialized,
+            ph=f"{ph:.2f}",
+            depth=f"{depth:.2f}cm",
+            temp=f"{temp:.2f}C",
+        )
 
     app.run(host="0.0.0.0", port=5000, use_reloader=False)
 
