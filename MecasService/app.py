@@ -32,7 +32,9 @@ def sensor_thread():
         ph_analog = arduino.read_analog(0)
 
         if ph_analog is not None:
-            ph = (1023 - ph_analog) / 73.07
+            ph = ((1023 - ph_analog) / 73.07) / 2.0
+        else:
+            print("pH reading failed")
 
         # Depth is hardcoded for now
         # depth = arduino.read_analog(1)
