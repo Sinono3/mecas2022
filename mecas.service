@@ -1,0 +1,12 @@
+[Unit]
+Description=MECAS Service
+After=multi-user.target
+
+[Service]
+Type=idle
+User=user
+ExecStart=/usr/bin/python3 /home/user/mecas/MecasService/app.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
